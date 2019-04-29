@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "dbtest": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "db__password": ""
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+﻿apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: dbtest
+  namespace: p2cpayments-dev
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: dbtest
+        service: sqlreplication
+        env: dev
+    spec:
+      containers:
+      - name: dbtest
+        image: acrcp3.azurecr.io/dbtest:0.6
+        imagePullPolicy: Always
+        env:
+        - name: db__database
+          value: "db-demo"
+        - name: db__password
+          value: ""
+        - name: db__primaryServer
+          value: ""
+        - name: db__secondaryServer
+          value: ""
+        - name: db__userId
+          value: "adrian"
+        - name: iCliOverride
+          value: "0"
+        - name: iLoops
+          value: "30000"
+        - name: isReadOnly
+          value: "true"
+        - name: iMsPause
+          value: "500"
+        - name: isFailover
+          value: "true"
+      imagePullSecrets:
+      - name: acrcp3
